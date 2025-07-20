@@ -94,6 +94,7 @@ bool	Random::addUser(std::string name) {
 
 bool	Random::addUsedTo(std::string name) {
 	name = trim_non_alpha(name);
+	pprint(usedTo);
 	if (checkIsIn(name, usedTo) || !checkIsIn(name, userList))
 		return false;
 	if (!name.empty())

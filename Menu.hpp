@@ -12,24 +12,28 @@
 class Menu {
 private:
 	Random	*list = NULL;
-	void	bonus();
 	void	random();
+	void	manual();
+	void	addUser();
+	void	basicEng();
+	void	basicIta();
+	void	bonusIta();
+	void	bonusEng();
 	void	taskList();
 	void	printTask();
-	void	mandatory();
+	void	addUsedto();
 	void	clearScreen();
 	void	printManual();
-	void	handleManual();
+	void	questionEng();
+	void	questionIta();
+	void	mandatoryEng();
+	void	mandatoryIta();
 	void	printMainMenu();
-	void	handleAddUser();
+	void	groupCreation();
 	void	printGuideIndex();
 	void	showGitHubGuide();
-	void	handleAddUsedto();
-	void	printGitHubBasics();
-	void	handleGroupCreation();
-	void	showBasicGitHubUsage();
-	void	showAddingCollaborators();
-	void	printGitHubCollaborators();
+	void	collaboratorsEng();
+	void	collaboratorsIta();
 	void	printByColumns(const std::vector<std::vector<std::string> >& data);
 	bool	equalsIgnoreCase(const std::string& a, const std::string& b);
 

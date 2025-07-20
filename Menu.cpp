@@ -14,15 +14,13 @@ void Menu::run() {
 		}
 
 		if (equalsIgnoreCase(trim_space(choice), "1"))
-			handleGroupCreation();
+			groupCreation();
 		else if (equalsIgnoreCase(trim_space(choice), "2"))
-			handleAddUser();
+			addUser();
 		else if (equalsIgnoreCase(trim_space(choice), "3"))
-			handleAddUsedto();
-		else if (equalsIgnoreCase(trim_space(choice), "it"))
-			handleManual();
-		else if (equalsIgnoreCase(trim_space(choice), "en"))
-			showGitHubGuide();
+			addUsedto();
+		else if (equalsIgnoreCase(trim_space(choice), "man"))
+			manual();
 		else if (equalsIgnoreCase(trim_space(choice), "task"))
 			taskList();
 		else if (equalsIgnoreCase(trim_space(choice), "random"))
@@ -44,14 +42,13 @@ void	Menu::printMainMenu() {
 	std::cout << "1.      Crea gruppo di utenti" << std::endl;
 	std::cout << "2.      Aggiungi uno user" << std::endl;
 	std::cout << "3.      Aggiungi uno usedto" << std::endl;
-	std::cout << "it.     Per una breve guida a gitHUB" << std::endl;
-	std::cout << "en.     For a fast guide at gitHUB" << std::endl;
+	std::cout << "man.    Manuale di sopravvivenza" << std::endl;
 	std::cout << "task.   task per la giornata" << std::endl;
 	std::cout << "random. Aggiungi uno usedto" << std::endl;
 	std::cout << "EXIT. per uscire" << std::endl;
 }
 
-void	Menu::handleGroupCreation() {
+void	Menu::groupCreation() {
 	clearScreen();
 	std::cout << "========= CREAZIONE GRUPPO UTENTI =========" << std::endl;
 	std::cout << "(EXIT per tornare al Menu)" << std::endl;
@@ -77,7 +74,7 @@ void	Menu::handleGroupCreation() {
 	printMainMenu();
 }
 
-void	Menu::handleAddUser() {
+void	Menu::addUser() {
 	clearScreen();
 	std::cout << "========= AGGIUNTA DI UN USER =========" << std::endl;
 	std::cout << "(EXIT per tornare al Menu)" << std::endl;
@@ -94,18 +91,18 @@ void	Menu::handleAddUser() {
 			break;
 		if (list) {
 			if (list->addUser(input)) {
-				std::cout << "Hai aggiunto l'utente: " << input << "\n" << std::endl;
+				std::cout << "Hai aggiunto l'utente: " << input << "!\n" << std::endl;
 			} else if (trim_space(input) == "") {
-				std::cout << "Fornire un utente da aggiungere\n" << std::endl;
+				std::cout << "Fornire un utente da aggiungere...\n" << std::endl;
 			} else
-				std::cout << "L'utente è già presente nel gruppo\n" << std::endl;
+				std::cout << "L'utente è già presente nel gruppo o inadatto...\n" << std::endl;
 		} else
 			std::cout << "nessuna lista esistente\n" << std::endl;
 	}
 	printMainMenu();
 }
 
-void	Menu::handleAddUsedto() {
+void	Menu::addUsedto() {
 	clearScreen();
 	std::cout << "========= AGGIUNTA DI UNO USEDTO =========" << std::endl;
 	std::cout << "(EXIT per tornare al Menu)" << std::endl;
@@ -121,13 +118,12 @@ void	Menu::handleAddUsedto() {
 		if (equalsIgnoreCase(trim_space(input), "EXIT"))
 			break;
 		if (list) {
-			list->addUsedTo(input);
-			if (list->addUser(input)) {
-				std::cout << "Hai aggiunto lo usedto: " << input << "\n" << std::endl;
+			if (list->addUsedTo(input)) {
+				std::cout << "Hai aggiunto lo usedto: " << input << "!\n" << std::endl;
 			} else if (trim_space(input) == "") {
-				std::cout << "Fornire uno usedTo da aggiungere\n" << std::endl;
+				std::cout << "Fornire uno usedTo da aggiungere...\n" << std::endl;
 			} else
-				std::cout << "Lo usedTo è già presente nel gruppo\n" << std::endl;
+				std::cout << "Lo usedTo è già presente nel gruppo o inadatto...\n" << std::endl;
 		} else
 			std::cout << "nessuna lista esistente\n" << std::endl;
 	}
@@ -221,7 +217,7 @@ void	Menu::clearScreen() {
 }
 
 
-void	Menu::handleManual() {
+void	Menu::manual() {
 	clearScreen();
 	printManual();
 
@@ -238,9 +234,13 @@ void	Menu::handleManual() {
 		if (equalsIgnoreCase(input, "EXIT"))
 			break;
 		else if (equalsIgnoreCase(input, "1"))
-			printGitHubBasics();
+			basicIta();
 		else if (equalsIgnoreCase(input, "2"))
-			printGitHubCollaborators();
+			collaboratorsIta();
+		else if (equalsIgnoreCase(input, "3"))
+			basicEng();
+		else if (equalsIgnoreCase(input, "4"))
+			collaboratorsEng();
 		else
 			std::cout << "Selezione non valida.\n" << std::endl;
 	}
@@ -249,12 +249,15 @@ void	Menu::handleManual() {
 
 void	Menu::printManual() {
 	std::cout << "========= MANUALE GITHUB =========" << std::endl;
-	std::cout << "1. Uso base di GitHub" << std::endl;
-	std::cout << "2. Aggiungere collaboratori a una repository" << std::endl;
+	std::cout << "1. Uso base di GitHub(it)" << std::endl;
+	std::cout << "2. Aggiungere collaboratori a una repository(it)" << std::endl;
+	std::cout << std::endl;
+	std::cout << "3. Basic GitHub usage(en)" << std::endl;
+	std::cout << "4. Adding collaborators to a repository(en)" << std::endl;
 	std::cout << "EXIT. Torna al menu principale" << std::endl;
 }
 
-void	Menu::printGitHubBasics() {
+void	Menu::basicIta() {
 	clearScreen();
 	std::cout << "========= MANUALE DI SOPPRAVIVENZA PER GITHUB =========" << std::endl;
 	std::cout << "1. Crea un account su https://github.com:" << std::endl;
@@ -291,7 +294,7 @@ void	Menu::printGitHubBasics() {
 	printManual();
 }
 
-void	Menu::printGitHubCollaborators() {
+void	Menu::collaboratorsIta() {
 	clearScreen();
 	std::cout << "========= AGGIUNGERE COLLABORATORI =========" << std::endl;
 	std::cout << "1. Vai alla repository su GitHub." << std::endl;
@@ -312,40 +315,7 @@ void	Menu::printGitHubCollaborators() {
 	printManual();
 }
 
-void	Menu::showGitHubGuide() {
-	clearScreen();
-	printGuideIndex();
-
-	std::string input;
-	while (true) {
-		std::cout << "> ";
-		if (!std::getline(std::cin, input)) {
-			std::cout << "\n[EOF detected. Returning to main menu.]\n";
-			std::cin.clear();
-			break;
-		}
-		input = trim_space(input);
-
-		if (equalsIgnoreCase(input, "EXIT"))
-			break;
-		else if (equalsIgnoreCase(input, "1"))
-			showBasicGitHubUsage();
-		else if (equalsIgnoreCase(input, "2"))
-			showAddingCollaborators();
-		else
-			std::cout << "Invalid selection.\n" << std::endl;
-	}
-	printMainMenu();
-}
-
-void	Menu::printGuideIndex() {
-	std::cout << "========= GITHUB USER GUIDE =========" << std::endl;
-	std::cout << "1. Basic GitHub usage" << std::endl;
-	std::cout << "2. Adding collaborators to a repository" << std::endl;
-	std::cout << "EXIT. Return to main menu" << std::endl;
-}
-
-void	Menu::showBasicGitHubUsage() {
+void	Menu::basicEng() {
 	clearScreen();
 	std::cout << "========= BASIC GITHUB USAGE =========" << std::endl;
 	std::cout << "1. Create an account at https://github.com" << std::endl;
@@ -374,10 +344,10 @@ void	Menu::showBasicGitHubUsage() {
 	std::string dummy;
 	std::getline(std::cin, dummy);
 	clearScreen();
-	printGuideIndex();
+	printManual();
 }
 
-void	Menu::showAddingCollaborators() {
+void	Menu::collaboratorsEng() {
 	clearScreen();
 	std::cout << "========= ADDING COLLABORATORS =========" << std::endl;
 	std::cout << "1. Go to your repository on GitHub." << std::endl;
@@ -394,7 +364,7 @@ void	Menu::showAddingCollaborators() {
 	std::string dummy;
 	std::getline(std::cin, dummy);
 	clearScreen();
-	printGuideIndex();
+	printManual();
 }
 
 void	Menu::taskList() {
@@ -414,9 +384,17 @@ void	Menu::taskList() {
 		if (equalsIgnoreCase(input, "EXIT"))
 			break;
 		else if (equalsIgnoreCase(input, "1"))
-			mandatory();
+			mandatoryIta();
 		else if (equalsIgnoreCase(input, "2"))
-			bonus();
+			bonusIta();
+		else if (equalsIgnoreCase(input, "3"))
+			questionIta();
+		else if (equalsIgnoreCase(input, "4"))
+			mandatoryEng();
+		else if (equalsIgnoreCase(input, "5"))
+			bonusEng();
+		else if (equalsIgnoreCase(input, "6"))
+			questionEng();
 		else
 			std::cout << "input non valido\n" << std::endl;
 	}
@@ -425,42 +403,161 @@ void	Menu::taskList() {
 
 void	Menu::printTask() {
 	std::cout << "========= TASK LIST =========" << std::endl;
-	std::cout << "1. Mandatory task" << std::endl;
-	std::cout << "2. Bonus" << std::endl;
-	std::cout << "EXIT. Return to main menu" << std::endl;
+	std::cout << "1. Mandatory task(it)" << std::endl;
+	std::cout << "2. Bonus(it)" << std::endl;
+	std::cout << "3. Question(it)" << std::endl;
+	std::cout << std::endl;
+	std::cout << "4. Mandatory task(en)" << std::endl;
+	std::cout << "5. Bonus(en)" << std::endl;
+	std::cout << "6. Question(en)" << std::endl;
+	std::cout << "EXIT. ritorna al main menu" << std::endl;
 }
 
-void	Menu::mandatory() {
+void	Menu::mandatoryIta() {
 	clearScreen();
 	std::cout << "========= MANDATORY =========" << std::endl;
-	std::cout << "   E' il momento di imparare ad usare git hub e lasicare in pace" << std::endl;
-	std::cout << "   questi poveri baywatcher. per prima cosa dovrete creare una" << std::endl;
-	std::cout << "   vostra repository su gitHUB, per poi scrivere l'inizio di una" << std::endl;
-	std::cout << "   storia da voi inventata. " << std::endl;
+	std::cout << "E' il momento di imparare ad usare git hub e lasicare in pace" << std::endl;
+	std::cout << "questi poveri baywatcher. per prima cosa dovrete creare una" << std::endl;
+	std::cout << "vostra repository su gitHUB, per poi scrivere l'inizio di una" << std::endl;
+	std::cout << "storia da voi inventata. dopo aver pushato il primo pezzo di" << std::endl;
+	std::cout << "storia dovrete trovare il vostro prossimo peer così da aggiungerlo" << std::endl;
+	std::cout << "come collaboratore alla vostra repository. a quel punto sarà lui" << std::endl;
+	std::cout << "a dover clonare la repo, leggere il vostro pezzo di storia" << std::endl;
+	std::cout << "per poi continuarlo. Di nuovo dovrete aggiungere il " << std::endl;
+	std::cout << "vostro prossimo peer e ripetere la stessa operazione. Questa" << std::endl;
+	std::cout << "volta dovrà scrivere una parte conclusiva dei primi due pezzi" << std::endl;
+	std::cout << "di storia presenti sulla repository." << std::endl;
+	std::cout << "Per finire in tutte le vostre repository dovrete aggiungere" << std::endl;
+	std::cout << "anche un membro dello staff o baywatcher così che possa leggere" << std::endl;
+	std::cout << "le vostre storie e proclamare un vincitore!" << std::endl;
+	std::cout << "I tre vincitory vincitori vinceranno il titolo esclusivo" << std::endl;
+	std::cout << "'Story teller', sempre che lo staff me lo permetta..." << std::endl;
+	std::cout << "Cmq, come sempre, ricordatevi che quello che conta di più" << std::endl;
+	std::cout << "è divertirsi come dei pazzi! Quindi scrivete le storie più" << std::endl;
+	std::cout << "assurde che vi vengono in mente!" << std::endl;
 	std::cout << std::endl;
-	std::cout << "Press ENTER to return to the task list...";
+	std::cout << "premere ENTER per tornare alal task list...";
 	std::string dummy;
 	std::getline(std::cin, dummy);
 	clearScreen();
-	printGuideIndex();
+	printTask();
 }
 
-void	Menu::bonus() {
+void	Menu::bonusIta() {
 	clearScreen();
 	std::cout << "========= BONUS =========" << std::endl;
-	std::cout << "1. Go to your repository on GitHub." << std::endl;
+	std::cout << "Non mi dilungherò visto che ho usato quasi tutte le mie" << std::endl;
+	std::cout << "facoltà celebrali per la mandatory part. Visto che questa" << std::endl;
+	std::cout << "questa è un'attività per imparare ad usare github mi sembrava" << std::endl;
+	std::cout << "giusto provare a farvi fare anche questo(non ho voglia di" << std::endl;
+	std::cout << "correggere questa parte quindi vedete di fare solo la parte" << std::endl;
+	std::cout << "mardatory intesi!)... per i coraggiosi che volessero inoltrarsi" << std::endl;
+	std::cout << "in questo mondo di caos e disperazione provate pure a mettere" << std::endl;
+	std::cout << "ogni pezzo della storia in una branch separata. Il primo pezzo" << std::endl;
+	std::cout << "nel main, la seconda una branch chiamata second e la terza in" << std::endl;
+	std::cout << "third(vi prego non fatelo, manco io ho ancora capito come" << std::endl;
+	std::cout << "funzionano...). Il premio per i pochi eletti che faranno" << std::endl;
+	std::cout << "questa pazzia verrà deciso in seguito, sperando che nessuno" << std::endl;
+	std::cout << "lo faccia in parte..." << std::endl;
 	std::cout << std::endl;
-	std::cout << "2. Click on 'Settings' at the top of the repository page." << std::endl;
+	std::cout << "premere ENTER per tornare alal task list...";
+	std::string dummy;
+	std::getline(std::cin, dummy);
+	clearScreen();
+	printTask();
+}
+
+void	Menu::questionIta() {
+	clearScreen();
+	std::cout << "========= QUESTION =========" << std::endl;
+	std::cout << "1.  Come capisco quali sono i miei peer?" << std::endl;
+	std::cout << "    Vi verrà data una 'tabella', una volta trovato il" << std::endl;
+	std::cout << "    vostro nome, sulla stessa riga troverete la priam e la" << std::endl;
+	std::cout << "    seconda persona da agguingere alla vostra repo. per" << std::endl;
+	std::cout << "    esempio, se sei topiana trovi la riga 'topiana fde-sant alborghi'." << std::endl;
+	std::cout << "    dovrai aggiungere prima fde-sant e poi alborghi, semplice no?" << std::endl;
 	std::cout << std::endl;
-	std::cout << "3. In the left sidebar, choose 'Collaborators'." << std::endl;
+	std::cout << "2.  Ma per repo si intende repository?" << std::endl;
+	std::cout << "    Si ragazzi, SI!!!" << std::endl;
 	std::cout << std::endl;
-	std::cout << "4. Click 'Add people' and enter the GitHub username." << std::endl;
-	std::cout << std::endl;
-	std::cout << "5. The person will receive an invitation they must accept." << std::endl;
+	std::cout << "premere ENTER per tornare alal task list...";
+	std::string dummy;
+	std::getline(std::cin, dummy);
+	clearScreen();
+	printTask();
+}
+
+void Menu::mandatoryEng() {
+	clearScreen();
+	std::cout << "========= MANDATORY =========" << std::endl;
+	std::cout << "It's time to learn how to use GitHub and finally leave" << std::endl;
+	std::cout << "those poor baywatchers alone. First, you'll have to create" << std::endl;
+	std::cout << "your own repository on GitHub, then write the beginning of a" << std::endl;
+	std::cout << "story you invent yourself. After pushing the first part of the" << std::endl;
+	std::cout << "story, you must find your next peer and add them" << std::endl;
+	std::cout << "as a collaborator to your repository. At that point, they will" << std::endl;
+	std::cout << "have to clone your repo, read your part of the story," << std::endl;
+	std::cout << "and then continue it. Then again, you'll add the" << std::endl;
+	std::cout << "next peer and repeat the process. This time, they will" << std::endl;
+	std::cout << "write a final part that concludes the two previous" << std::endl;
+	std::cout << "sections of the story already in the repository." << std::endl;
+	std::cout << "Finally, you must also add a member of the staff" << std::endl;
+	std::cout << "or a baywatcher to your repository so they can read" << std::endl;
+	std::cout << "your stories and choose a winner!" << std::endl;
+	std::cout << "The three winners will earn the exclusive title" << std::endl;
+	std::cout << "'Story Teller' – assuming the staff lets me do it..." << std::endl;
+	std::cout << "Anyway, as always, remember that what matters most" << std::endl;
+	std::cout << "is to have a blast! So write the wildest stories" << std::endl;
+	std::cout << "you can think of!" << std::endl;
 	std::cout << std::endl;
 	std::cout << "Press ENTER to return to the task list...";
 	std::string dummy;
 	std::getline(std::cin, dummy);
 	clearScreen();
-	printGuideIndex();
+	printTask();
+}
+
+void Menu::bonusEng() {
+	clearScreen();
+	std::cout << "========= BONUS =========" << std::endl;
+	std::cout << "I won’t go into too much detail since I used up almost all my" << std::endl;
+	std::cout << "brainpower on the mandatory part. Since this activity is" << std::endl;
+	std::cout << "meant to teach you GitHub, I thought it would be fair" << std::endl;
+	std::cout << "to challenge you with this as well (though I won’t be" << std::endl;
+	std::cout << "correcting this part, so please just stick to the mandatory" << std::endl;
+	std::cout << "part, got it?)... For the brave ones who want to dive" << std::endl;
+	std::cout << "into this world of chaos and despair, try putting" << std::endl;
+	std::cout << "each part of the story into a separate branch. The first" << std::endl;
+	std::cout << "part in `main`, the second in a branch called `second`, and" << std::endl;
+	std::cout << "the third in `third` (please don’t actually do this, not even I" << std::endl;
+	std::cout << "fully understand how this works...). The reward for the few" << std::endl;
+	std::cout << "chosen ones who go through with this madness will be" << std::endl;
+	std::cout << "decided later – hopefully no one actually does it..." << std::endl;
+	std::cout << std::endl;
+	std::cout << "Press ENTER to return to the task list...";
+	std::string dummy;
+	std::getline(std::cin, dummy);
+	clearScreen();
+	printTask();
+}
+
+void	Menu::questionEng() {
+	clearScreen();
+	std::cout << "========= QUESTIONS =========" << std::endl;
+	std::cout << "1.  How do I know who my peers are?" << std::endl;
+	std::cout << "    You will be given a 'table'. Once you find your" << std::endl;
+	std::cout << "    name in it, on the same row you'll see the first and" << std::endl;
+	std::cout << "    second person to add to your repo." << std::endl;
+	std::cout << "    For example, if your name is 'topiana' and you see the line:" << std::endl;
+	std::cout << "    'topiana fde-sant alborghi', it means you must add" << std::endl;
+	std::cout << "    fde-sant first, then alborghi. Simple, right?" << std::endl;
+	std::cout << std::endl;
+	std::cout << "2.  Wait... does 'repo' mean 'repository'?" << std::endl;
+	std::cout << "    Yes guys, YES!!!" << std::endl;
+	std::cout << std::endl;
+	std::cout << "Press ENTER to return to the task list...";
+	std::string dummy;
+	std::getline(std::cin, dummy);
+	clearScreen();
+	printTask();
 }
