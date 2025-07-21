@@ -430,7 +430,7 @@ void	Menu::mandatoryIta() {
 	std::cout << "Per finire in tutte le vostre repository dovrete aggiungere" << std::endl;
 	std::cout << "anche un membro dello staff o baywatcher così che possa leggere" << std::endl;
 	std::cout << "le vostre storie e proclamare un vincitore!" << std::endl;
-	std::cout << "I tre vincitory vincitori vinceranno il titolo esclusivo" << std::endl;
+	std::cout << "I tre vincitory vincitori vinceranno un achivment esclusivo" << std::endl;
 	std::cout << "'Story teller', sempre che lo staff me lo permetta..." << std::endl;
 	std::cout << "Cmq, come sempre, ricordatevi che quello che conta di più" << std::endl;
 	std::cout << "è divertirsi come dei pazzi! Quindi scrivete le storie più" << std::endl;
@@ -504,7 +504,7 @@ void Menu::mandatoryEng() {
 	std::cout << "Finally, you must also add a member of the staff" << std::endl;
 	std::cout << "or a baywatcher to your repository so they can read" << std::endl;
 	std::cout << "your stories and choose a winner!" << std::endl;
-	std::cout << "The three winners will earn the exclusive title" << std::endl;
+	std::cout << "The three winners will earn the exclusive achivment" << std::endl;
 	std::cout << "'Story Teller' – assuming the staff lets me do it..." << std::endl;
 	std::cout << "Anyway, as always, remember that what matters most" << std::endl;
 	std::cout << "is to have a blast! So write the wildest stories" << std::endl;
